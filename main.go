@@ -17,7 +17,7 @@ type Response struct {
 }
 
 type ErrorResponse struct {
-	Reason string
+	Reason string `json:"reason"`
 }
 
 func calculateIncomeTax(income float64) float64 {
