@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"os"
+	"log"
 )
 
 type Request struct {
@@ -36,6 +37,8 @@ func (t *IncomeTaxHandler) ServeHTTP(res http.ResponseWriter, req *http.Request)
 	var decoder = json.NewDecoder(req.Body)
 	var encoder = json.NewEncoder(res)
 	var requestJson = &Request{}
+	var header = res.Header()
+	header["Content-Type"] = []string{"application/json"}
 
 	if req.Method != "POST" {
 		res.WriteHeader(http.StatusMethodNotAllowed)
@@ -55,5 +58,8 @@ func (t *IncomeTaxHandler) ServeHTTP(res http.ResponseWriter, req *http.Request)
 
 func main() {
 	http.Handle("/income-tax", &IncomeTaxHandler{})
-	http.ListenAndServe(":" + os.Getenv("PORT"), nil)
+
+	if err := http.ListenAndServe(":" + os.Getenv("PORT"), nil); err != nil {
+		log.Fatal(err)
+	}
 }
