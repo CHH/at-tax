@@ -10,6 +10,8 @@ Formulas were taken from [help.gv.at][].
 
 It only returns an estimate, without warranty.
 
+The service is available at <http://chh-at-tax.herokuapp.com>.
+
 ## Usage
 
 Make a HTTP POST request to `/income-tax` with a JSON payload. The payload's
