@@ -4,7 +4,11 @@ at-tax
 Simple web service which estimates the Austrian income tax for
 self employed people like me (not for employed).
 
-It only returns an estimate, without warranty!
+Formulas were taken from [help.gv.at][].
+
+[help.gv.at]: https://www.help.gv.at/Portal.Node/hlpd/public/content/227/Seite.2270600.html
+
+It only returns an estimate, without warranty.
 
 ## Usage
 
