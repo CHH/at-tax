@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"log"
+	"fmt"
 )
 
 type Request struct {
@@ -58,6 +59,9 @@ func (t *IncomeTaxHandler) ServeHTTP(res http.ResponseWriter, req *http.Request)
 
 func main() {
 	http.Handle("/income-tax", &IncomeTaxHandler{})
+	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
+		fmt.Fprintln(res, "See https://github.com/CHH/at-tax for usage.")
+	})
 
 	if err := http.ListenAndServe(":" + os.Getenv("PORT"), nil); err != nil {
 		log.Fatal(err)
