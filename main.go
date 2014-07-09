@@ -2,10 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
 	"net/http"
 	"os"
-	"log"
-	"fmt"
+	"strconv"
 )
 
 type Request struct {
@@ -28,11 +29,11 @@ func calculateIncomeTax(income float64) float64 {
 	} else if income > 25000 && income <= 60000 {
 		return 5110 + (((income - 25000) * 15125) / 35000)
 	} else {
-		return 20235 + (income - 60000) * 0.5
+		return 20235 + (income-60000)*0.5
 	}
 }
 
-type IncomeTaxHandler struct {}
+type IncomeTaxHandler struct{}
 
 func (t *IncomeTaxHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	var decoder = json.NewDecoder(req.Body)
@@ -54,7 +55,12 @@ func (t *IncomeTaxHandler) ServeHTTP(res http.ResponseWriter, req *http.Request)
 	}
 
 	income := requestJson.Income
-	encoder.Encode(&Response{Tax: calculateIncomeTax(income)})
+
+	// Convert to 2 decimals precision and parse as float, so it's also
+	// encoded as float in JSON
+	tax, _ := strconv.ParseFloat(fmt.Sprintf("%.2f", calculateIncomeTax(income)), 64)
+
+	encoder.Encode(&Response{Tax: tax})
 }
 
 func main() {
@@ -63,7 +69,7 @@ func main() {
 		fmt.Fprintln(res, "See https://github.com/CHH/at-tax for usage.")
 	})
 
-	if err := http.ListenAndServe(":" + os.Getenv("PORT"), nil); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
 		log.Fatal(err)
 	}
 }
