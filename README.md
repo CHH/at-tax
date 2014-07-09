@@ -34,6 +34,17 @@ The response format looks like this:
 HTTP error codes are used throughout the API. A detailed error message is
 returned in the JSON's `reason` property.
 
+## How to run locally
+
+Make sure you have at least [Go][] v1.2 installed.
+
+[Go]: http://golang.org
+
+Then run `go get -u github.com/CHH/at-tax`.
+
+You can run the daemon with `PORT=8080 at-tax`. The service should then be
+running on <http://localhost:8080>.
+
 ## License
 
 The MIT License (MIT)
