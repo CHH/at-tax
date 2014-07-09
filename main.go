@@ -14,7 +14,8 @@ type Request struct {
 }
 
 type Response struct {
-	Tax float64 `json:"tax"`
+	Income float64 `json:"income"`
+	Tax    float64 `json:"tax"`
 }
 
 type ErrorResponse struct {
@@ -60,7 +61,7 @@ func (t *IncomeTaxHandler) ServeHTTP(res http.ResponseWriter, req *http.Request)
 	// encoded as float in JSON
 	tax, _ := strconv.ParseFloat(fmt.Sprintf("%.2f", calculateIncomeTax(income)), 64)
 
-	encoder.Encode(&Response{Tax: tax})
+	encoder.Encode(&Response{Tax: tax, Income: income})
 }
 
 func main() {

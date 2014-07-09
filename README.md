@@ -26,7 +26,7 @@ format looks like this:
 The response format looks like this:
 
 ```json
-{"tax": 1095.08}
+{"income": 14000.21,"tax": 1095.08}
 ```
 
 ## Errors
