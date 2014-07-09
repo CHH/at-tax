@@ -42,6 +42,7 @@ func (t *IncomeTaxHandler) ServeHTTP(res http.ResponseWriter, req *http.Request)
 	var requestJson = &Request{}
 	var header = res.Header()
 	header["Content-Type"] = []string{"application/json"}
+	header["Access-Control-Allow-Origin"] = []string{"*"}
 
 	if req.Method != "POST" {
 		res.WriteHeader(http.StatusMethodNotAllowed)
