@@ -1,7 +1,10 @@
 at-tax
 ======
 
-Simple Web Service which calculates the Austrian income tax (not for employees)
+Simple web service which estimates the Austrian income tax for
+self employed people like me (not for employed).
+
+It only returns an estimate, without warranty!
 
 ## Usage
 
