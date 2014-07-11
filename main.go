@@ -71,7 +71,6 @@ func main() {
 		fmt.Fprintln(res, "See https://github.com/CHH/at-tax for usage.")
 	})
 
-	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
-		log.Fatal(err)
-	}
+	log.Println("Listening on :" + os.Getenv("PORT"))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 }
